@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^s3direct/', include('s3direct.urls')),
 ]
