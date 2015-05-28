@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'gallery',
+    's3direct',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,6 +92,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# AWS keys
+AWS_SECRET_ACCESS_KEY = ''
+AWS_ACCESS_KEY_ID = ''
+AWS_STORAGE_BUCKET_NAME = ''
+
+# The region of your bucket, more info:
+# http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+S3DIRECT_REGION = 'eu-west-1'
+
+# Destinations in the following format:
+# 'destination_key' is the key to use for the 'dest' attribute on your widget or model field
+S3DIRECT_DESTINATIONS = {
+    # Only allow uploads of jpeg's and png's.
+    'imgs': ('uploads/imgs', lambda u: True, ['image/jpeg', 'image/png'],),
+}
 
 try:
     from local_settings import *
