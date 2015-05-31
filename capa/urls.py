@@ -16,8 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from gallery import api_urls as gallery_urls
+
 urlpatterns = [
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(
+        r'^api-auth/',
+        include('rest_framework.urls', namespace='rest_framework')
+    ),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/gallery/', include(gallery_urls)),
     url(r'^s3direct/', include('s3direct.urls')),
 ]

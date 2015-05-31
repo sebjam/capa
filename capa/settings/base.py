@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'gallery',
     's3direct',
+    'django_nose',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,6 +109,8 @@ S3DIRECT_DESTINATIONS = {
     # Only allow uploads of jpeg's and png's.
     'imgs': ('uploads/imgs', lambda u: True, ['image/jpeg', 'image/png'],),
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 try:
     from local_settings import *

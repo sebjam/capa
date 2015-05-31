@@ -9,4 +9,4 @@ class Photo(models.Model):
     title = models.CharField(max_length=55)
     description = models.TextField(blank=True)
     gallery = models.ForeignKey(Gallery)
-    image = S3DirectField(dest='imgs')
+    image = S3DirectField(dest='imgs', default='')
