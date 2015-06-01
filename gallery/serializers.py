@@ -1,13 +1,14 @@
 from rest_framework import serializers
-from .models import Photo
+from .models import Gallery, Photo
 
 
 class PhotoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Photo
-        fields = ('title', 'description', 'image')
+        fields = ('id', 'title', 'description', 'image')
+
 
 class GallerySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Photo
+        model = Gallery
         fields = ('title', 'description')
