@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -9,6 +8,8 @@ from django.views.generic.list import ListView
 
 from rest_framework import permissions, viewsets
 
+
+from gallery.mixins import DetailAuthZMixin, ListAuthZMixin
 from gallery.models import Gallery, Photo
 from gallery.serializers import GallerySerializer, PhotoSerializer
 
@@ -27,7 +28,7 @@ class CreateGalleryView(CreateView):
     fields = ['title', 'description', 'user']
 
 
-class ListGalleryView(ListView):
+class ListGalleryView(ListAuthZMixin, ListView):
     model = Gallery
 
     def get_context_data(self, **kwargs):
@@ -36,7 +37,7 @@ class ListGalleryView(ListView):
         return context
 
 
-class DetailGalleryView(DetailView):
+class DetailGalleryView(DetailAuthZMixin, DetailView):
     model = Gallery
 
     def get_context_data(self, **kwargs):
