@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n bootstrap3 %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+<p>{{ object.description }}</p>
+<p>Owner: {{ object.user }}</p>
+<p>Date: {{ now|date }}</p>
+<div class="row">
+{% for photo in object.photos.all %}
+    <div class="col-xs-6 col-md-3" style="height: 180px">
+        <a href="#" class="thumbnail">
+            <img src="{{ photo.image }}" alt="{{ photo.title }}" style="max-height: 140px" />
+        </a>
+    </div>
+{% endfor %}
+</div>
+<div class="btn-group" role="group" aria-label="...">
+    <a role="button" class="btn btn-primary" href="{% url 'create_photo' gallery.id %}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Add Photo
+    </a>
+</div>
+{% endblock %}
+

@@ -9,6 +9,8 @@ class PhotoSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GallerySerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
         model = Gallery
-        fields = ('title', 'description')
+        fields = ('title', 'description', 'user')

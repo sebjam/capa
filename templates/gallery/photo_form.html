@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n bootstrap3 %}
+
+{% block title %}{% trans "Upload Photo" %}{% endblock %}
+
+{% block bootstrap3_extra_head %}
+   {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<form method="post" action="">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "plus" %} Add 
+        </button>
+    {% endbuttons %}    
+</form>
+{% endblock %}

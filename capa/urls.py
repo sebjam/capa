@@ -17,8 +17,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from api import urls as api_urls
+from gallery import urls as gallery_urls
 
 urlpatterns = [
+    url(r'', include(gallery_urls)),
     url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')
@@ -26,4 +28,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(api_urls)),
     url(r'^s3direct/', include('s3direct.urls')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
 ]

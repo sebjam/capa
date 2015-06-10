@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n bootstrap3 %}
+
+{% block title %}{% trans "Galleries" %}{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+{% for gallery in object_list %}
+    <a class="list-group-item" href="{% url 'detail_gallery' gallery.id %}">{{ gallery.title }}</a>
+{% empty %}
+    <li class="list-group-item">No galleries yet.</li>
+{% endfor %}
+</ul>
+<div class="btn-group" role="group" aria-label="...">
+    <a role="button" class="btn btn-primary" href="{% url 'create_gallery' %}">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Create Gallery
+    </a>
+</div>
+{% endblock %}
+

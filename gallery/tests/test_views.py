@@ -1,29 +1,17 @@
 from django.core.urlresolvers import reverse
+from django.test import TestCase
 
+from gallery.models import Gallery
 from model_mommy import mommy
 
-from gallery.models import Gallery, Photo
 
-from rest_framework import status
-from rest_framework.test import APITestCase
-
-
-class GalleryViewsTest(APITestCase):
+class GalleryViewsTest(TestCase):
 
     def setUp(self):
         self.gallery = mommy.make(Gallery)
-        self.photos = mommy.make(
-            Photo,
-            gallery=self.gallery,
-            _quantity=10
+
+    def test_gallery_detail_view(self):
+        response = self.client.get(
+            reverse('detail_gallery', kwargs={'pk': self.gallery.id})
         )
-
-    def test_list_gallery_photos(self):
-        response = self.client.get(reverse('photo-list'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # TODO: assert list of photos
-
-    def test_list_gallery(self):
-        response = self.client.get(reverse('gallery-list'))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # TODO: assert list of photos
+        self.assertEqual(response.status_code, 200)

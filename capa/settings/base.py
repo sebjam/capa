@@ -41,6 +41,9 @@ INSTALLED_APPS = (
     'gallery',
     's3direct',
     'django_nose',
+    'bootstrap3',
+    'registration',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,10 +59,15 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'capa.urls'
 
+
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PROJECT_PATH, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,8 +100,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
 STATIC_URL = '/static/'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+OMPRESS_OUTPUT_DIR = ''
 # AWS keys
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET']
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS']
@@ -112,6 +131,9 @@ S3DIRECT_DESTINATIONS = {
 }
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+ACCOUNT_ACTIVATION_DAYS = 5
+REGISTRATION_AUTO_LOGIN = True
 
 try:
     from local_settings import *
