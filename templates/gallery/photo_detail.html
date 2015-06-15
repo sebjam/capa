@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n bootstrap3 %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+<p>{{ object.description }}</p>
+<p>Date: {{ now|date }}</p>
+<div class="row">
+    <img src="{{ object.image }}" alt="{{ object.title }}" />
+</div>
+{% endblock %}
+

@@ -9,7 +9,11 @@ from django.views.generic.list import ListView
 from rest_framework import permissions, viewsets
 
 
-from gallery.mixins import DetailAuthZMixin, ListAuthZMixin
+from gallery.mixins import (
+    DetailAuthZMixin,
+    DetailChildAuthZMixin,
+    ListAuthZMixin
+)
 from gallery.models import Gallery, Photo
 from gallery.serializers import GallerySerializer, PhotoSerializer
 
@@ -58,6 +62,15 @@ class CreatePhotoView(CreateView):
 
     def get_success_url(self):
         return reverse('detail_gallery', kwargs={'pk': self.kwargs.get('pk')})
+
+
+class DetailPhotoView(DetailChildAuthZMixin, DetailView):
+    model = Photo
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailPhotoView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
 
 
 # API Views

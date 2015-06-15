@@ -29,6 +29,27 @@ class DetailAuthZMixin(object):
         return obj
 
 
+class DetailChildAuthZMixin(object):
+
+    def get_object(self, queryset=None):
+
+        if queryset is None:
+            queryset = self.get_queryset()
+        
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+        queryset = queryset.filter(
+            pk=pk,
+            parent__owner=self.request.user,
+        )
+
+        try:
+            obj = queryset.get()
+        except ObjectDoesNotExist:
+            raise PermissionDenied
+
+        return obj
+
+
 class ListAuthZMixin(object):
 
     def get_queryset(self):

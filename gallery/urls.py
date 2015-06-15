@@ -7,6 +7,7 @@ from .views import (
     CreateGalleryView,
     CreatePhotoView,
     DetailGalleryView,
+    DetailPhotoView,
     HomePageView,
     ListGalleryView
 )
@@ -28,6 +29,11 @@ urlpatterns = patterns(
         r'^gallery/(?P<pk>[-\w]+)/photo/create',
         CreatePhotoView.as_view(),
         name='create_photo'
+    ),
+    url(
+        r'^gallery/(?P<parent_pk>[-\w]+)/photo/(?P<pk>[-\w]+)/$',
+        DetailPhotoView.as_view(),
+        name='detail_photo'
     ),
     url(r'^gallery/', ListGalleryView.as_view(), name='list_gallery'),
 )

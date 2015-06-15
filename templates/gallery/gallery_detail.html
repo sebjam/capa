@@ -10,7 +10,7 @@
 <div class="row">
 {% for photo in object.photos.all %}
     <div class="col-xs-6 col-md-3" style="height: 180px">
-        <a href="#" class="thumbnail">
+        <a href="{% url 'detail_photo' photo.parent.id photo.id %}" class="thumbnail">
             <img src="{{ photo.image }}" alt="{{ photo.title }}" style="max-height: 140px" />
         </a>
     </div>
