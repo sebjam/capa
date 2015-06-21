@@ -9,9 +9,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'capa',
-        'USER': os.environ['CAPA_DB_PASSWORD'],
-        'PASSWORD': 'capa',
+        'USER': 'capa',
+        'PASSWORD': os.environ['CAPA_DB_PASSWORD'],
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': os.environ.get('CAPA_DB_PORT', ''),
     }
 }

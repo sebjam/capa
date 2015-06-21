@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'registration',
     'compressor',
+    'amazon'
 )
 
 MIDDLEWARE_CLASSES = (
